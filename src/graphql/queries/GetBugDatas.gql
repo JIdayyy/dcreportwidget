@@ -1,0 +1,29 @@
+query GetBugDatas($where: BugWhereUniqueInput!) {
+  bug(where: $where) {
+    id
+    number
+    title
+    status
+    severity
+    Website {
+      id
+      name
+      url
+      logo
+      isPreview
+    }
+    File {
+      id
+      name
+      path
+    }
+    priority
+    description
+    user {
+      first_name
+      last_name
+      email
+      avatar
+    }
+  }
+}

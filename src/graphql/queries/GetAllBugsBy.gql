@@ -1,0 +1,14 @@
+query GetAllBugsBy(
+  $orderBy: [BugOrderByWithRelationInput!]
+  $where: BugWhereInput!
+) {
+  bugs(orderBy: $orderBy, where: $where) {
+    id
+    created_at
+    status
+    number
+    Website {
+      name
+    }
+  }
+}
