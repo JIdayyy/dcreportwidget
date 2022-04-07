@@ -1,14 +1,16 @@
 import React, { useContext } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
+import { ActionType } from '../../context/Actions'
 import { AppContext } from '../../context/AppContext'
 import {
   BugSeverity,
   BugStatus,
   useCreateCustomBugMutation,
 } from '../../generated/graphql'
-import Input from '../UI/Input'
+import Input from '../UI/Input/Input'
 import Loader from '../UI/Loader'
-import TextArea from '../UI/TextArea'
+import TextArea from '../UI/TextArea/TextArea'
+import './createbug.form.css'
 
 const websiteId = import.meta.env.VITE_WEBSITE_ID
 
@@ -17,7 +19,7 @@ export default function CreateReport(): JSX.Element {
   const { handleSubmit, register } = useForm()
   const [mutateCreateBug, { loading }] = useCreateCustomBugMutation({
     onCompleted: () => {
-      // dispatch({ type: ActionType.SetSection, payload: '' })
+      dispatch({ type: ActionType.SetSection, payload: '' })
     },
   })
 
@@ -52,7 +54,7 @@ export default function CreateReport(): JSX.Element {
 
   return (
     <form
-      className="flex flex-col items-center justify-between align-top w-full h-full p-4"
+      className="createbug-form-container"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input placeholder="Title" name="title" register={register} />
@@ -61,10 +63,7 @@ export default function CreateReport(): JSX.Element {
         name="description"
         register={register}
       />
-      <button
-        className="bg-blue-base flex items-center align-middle justify-center text-white h-8 w-20 font-bold text-base px-2 py-1 rounded-sm"
-        type="submit"
-      >
+      <button className="submit-button" type="submit">
         {loading ? <Loader /> : 'Submit'}
       </button>
     </form>
