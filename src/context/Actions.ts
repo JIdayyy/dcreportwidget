@@ -1,5 +1,6 @@
 export enum ActionType {
   SetSelectedCategory,
+  SetSection,
 }
 
 export interface SetSelectedCategory {
@@ -7,4 +8,9 @@ export interface SetSelectedCategory {
   payload: string
 }
 
-export type AppActions = SetSelectedCategory
+export interface SetSection {
+  type: ActionType.SetSection
+  payload: string
+}
+
+export type AppActions = SetSelectedCategory | SetSection

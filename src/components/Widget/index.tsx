@@ -1,11 +1,18 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Header from '../Header/index'
 import Reports from '../Report/index'
 import Footer from '../Footer/index'
 import { useMutateLoginMutation } from '../../generated/graphql'
+import { AppContext } from '../../context/AppContext'
+import { ActionType } from '../../context/Actions'
 
-export default function Widget(): JSX.Element {
+export default function Widget({
+  setIsOpen,
+}: {
+  setIsOpen: (value: boolean) => void
+}): JSX.Element {
   const [section, setSection] = useState<string | null>(null)
+  const { state, dispatch } = useContext(AppContext)
 
   const [login] = useMutateLoginMutation({
     variables: {
@@ -22,12 +29,14 @@ export default function Widget(): JSX.Element {
 
   return (
     <div className="absolute bottom-10 flex flex-col items-center overflow-hidden shadow-md justify-start align-top right-10 bg-almost-white rounded-xl h-96 w-72">
-      <Header />
+      <Header setIsOpen={setIsOpen} />
 
-      {!section && (
+      {!state.section && (
         <div className="w-full p-4 h-full">
           <button
-            onClick={() => setSection('bugreport')}
+            onClick={() =>
+              dispatch({ type: ActionType.SetSection, payload: 'bugreport' })
+            }
             type="button"
             className="bg-white text-left rounded-md shadow-sm px-2 py-1 text-base font-bold text-blue-base w-full"
           >
@@ -36,7 +45,7 @@ export default function Widget(): JSX.Element {
         </div>
       )}
 
-      {section === 'bugreport' && <Reports />}
+      {state.section === 'bugreport' && <Reports />}
 
       <Footer />
     </div>

@@ -7,12 +7,19 @@ import {
   useCreateCustomBugMutation,
 } from '../../generated/graphql'
 import Input from '../UI/Input'
+import Loader from '../UI/Loader'
 import TextArea from '../UI/TextArea'
 
+const websiteId = import.meta.env.VITE_WEBSITE_ID
+
 export default function CreateReport(): JSX.Element {
-  const { state } = useContext(AppContext)
+  const { state, dispatch } = useContext(AppContext)
   const { handleSubmit, register } = useForm()
-  const [mutateCreateBug] = useCreateCustomBugMutation()
+  const [mutateCreateBug, { loading }] = useCreateCustomBugMutation({
+    onCompleted: () => {
+      // dispatch({ type: ActionType.SetSection, payload: '' })
+    },
+  })
 
   const onSubmit = (formData: FieldValues) => {
     mutateCreateBug({
@@ -22,7 +29,7 @@ export default function CreateReport(): JSX.Element {
           description: formData.description,
           Website: {
             connect: {
-              id: '729ccb1b-3c65-478a-8657-9674244a5314',
+              id: websiteId as string,
             },
           },
           severity: BugSeverity.Low,
@@ -35,7 +42,7 @@ export default function CreateReport(): JSX.Element {
           },
           user: {
             connect: {
-              id: '21a903e3-d188-4ec6-b9c0-0c7ff497e16f',
+              email: 'guest@metashop.fr',
             },
           },
         },
@@ -55,10 +62,10 @@ export default function CreateReport(): JSX.Element {
         register={register}
       />
       <button
-        className="bg-blue-base text-white font-bold text-base px-2 py-1 rounded-sm"
+        className="bg-blue-base flex items-center align-middle justify-center text-white h-8 w-20 font-bold text-base px-2 py-1 rounded-sm"
         type="submit"
       >
-        submit
+        {loading ? <Loader /> : 'Submit'}
       </button>
     </form>
   )
