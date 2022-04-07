@@ -9,7 +9,7 @@ import {
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null
 
 const serverUrl =
-  process.env.REACT_APP_REPORT_SERVER_URL || 'http://localhost:5000/graphql'
+  import.meta.env.VITE_SERVER_URL || 'http://localhost:5000/graphql'
 
 const httpLink = createHttpLink({
   uri: serverUrl as string,
