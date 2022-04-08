@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser'
 import external from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
 import babel from '@rollup/plugin-babel'
+import image from '@rollup/plugin-image'
 
 const packageJson = require('./package.json')
 
@@ -44,6 +45,7 @@ export default {
         insertAt: 'top',
       },
     }),
+    image(),
     terser(),
   ],
 }
