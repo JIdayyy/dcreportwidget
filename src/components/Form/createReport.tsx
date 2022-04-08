@@ -12,7 +12,7 @@ import Loader from '../UI/Loader'
 import TextArea from '../UI/TextArea/TextArea'
 import './createbug.form.css'
 
-const websiteId = import.meta.env.VITE_WEBSITE_ID
+const websiteId = 'feiuhzb'
 
 export default function CreateReport(): JSX.Element {
   const { state, dispatch } = useContext(AppContext)
