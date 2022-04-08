@@ -5,6 +5,7 @@ import typescript from '@rollup/plugin-typescript'
 import { terser } from 'rollup-plugin-terser'
 import external from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
+import babel from '@rollup/plugin-babel'
 
 const packageJson = require('./package.json')
 
@@ -23,12 +24,26 @@ export default {
       sourcemap: true,
     },
   ],
+  external: ['react', 'react-dom'],
   plugins: [
     external(),
     resolve(),
+    babel({
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**',
+    }),
     commonjs(),
     typescript({ tsconfig: './tsconfig.json' }),
-    postcss(),
+    postcss({
+      config: {
+        path: './postcss.config.js',
+      },
+      extensions: ['.css'],
+      minimize: true,
+      inject: {
+        insertAt: 'top',
+      },
+    }),
     terser(),
   ],
 }
