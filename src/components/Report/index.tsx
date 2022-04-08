@@ -6,7 +6,7 @@ import CreateReport from '../Form/createReport'
 export default function Reports(): JSX.Element {
   const { state } = useContext(AppContext)
   return (
-    <div className="w-full h-full">
+    <div className="fullcontainer">
       {!state.category ? <Categories /> : <CreateReport />}
     </div>
   )

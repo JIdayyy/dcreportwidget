@@ -5,6 +5,7 @@ import Footer from '../Footer/index'
 import { useMutateLoginMutation } from '../../generated/graphql'
 import { AppContext } from '../../context/AppContext'
 import { ActionType } from '../../context/Actions'
+import './widget.css'
 
 export default function Widget({
   setIsOpen,
@@ -28,17 +29,17 @@ export default function Widget({
   }, [])
 
   return (
-    <div className="absolute bottom-10 flex flex-col items-center overflow-hidden shadow-md justify-start align-top right-10 bg-almost-white rounded-xl h-96 w-72">
+    <div className="widget-container">
       <Header setIsOpen={setIsOpen} />
 
       {!state.section && (
-        <div className="w-full p-4 h-full">
+        <div className="first-body">
           <button
             onClick={() =>
               dispatch({ type: ActionType.SetSection, payload: 'bugreport' })
             }
             type="button"
-            className="bg-white text-left rounded-md shadow-sm px-2 py-1 text-base font-bold text-blue-base w-full"
+            className="first-body-button"
           >
             Report a bug
           </button>

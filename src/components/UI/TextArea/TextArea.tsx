@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
+import './textarea.css'
 
 type Props = {
   register: UseFormRegister<FieldValues>
@@ -8,14 +9,14 @@ type Props = {
   placeholder: string
 }
 
-export default function Input({
+export default function TextArea({
   register,
   name,
   placeholder,
 }: Props): JSX.Element {
   return (
-    <input
-      className="w-full rounded-md px-2 py-1 border-blue-base  border"
+    <textarea
+      className="text-area"
       {...register(name)}
       placeholder={placeholder}
     />

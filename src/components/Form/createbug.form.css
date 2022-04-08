@@ -1,0 +1,31 @@
+.createbug-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  vertical-align: top;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+}
+
+.submit-button {
+  --tw-bg-opacity: 1;
+  background-color: rgb(36 50 63 / var(--tw-bg-opacity));
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
+  justify-content: center;
+  --tw-text-opacity: 1;
+  color: rgb(255 255 255 / var(--tw-text-opacity));
+  height: 2rem /* 32px */;
+  width: 5rem /* 80px */;
+  font-weight: 700;
+  font-size: 1rem /* 16px */;
+  line-height: 1.5rem /* 24px */;
+  padding-left: 0.5rem /* 8px */;
+  padding-right: 0.5rem /* 8px */;
+  padding-top: 0.25rem /* 4px */;
+  padding-bottom: 0.25rem /* 4px */;
+  border-radius: 0.125rem /* 2px */;
+}
