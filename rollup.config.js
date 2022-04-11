@@ -15,20 +15,26 @@ const packageJson = require('./package.json')
 export default [
   {
     input: 'src/index.ts',
-    output: {
-      dir: 'dist',
-      format: 'cjs',
-    },
+    output: [
+      {
+        file: packageJson.main,
+        format: 'cjs',
+        sourcemap: true,
+        name: 'react-lib',
+      },
+      {
+        file: packageJson.module,
+        format: 'esm',
+        sourcemap: true,
+      },
+    ],
     plugins: [
       external(),
       resolve(),
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
       terser(),
-      babel({
-        babelHelpers: 'bundled',
-        exclude: 'node_modules/**',
-      }),
+      babel(),
       postcss({
         config: {
           path: './postcss.config.js',
