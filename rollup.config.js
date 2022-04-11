@@ -14,9 +14,9 @@ const packageJson = require('./package.json')
 
 export default [
   {
-    input: 'src/App.tsx',
+    input: 'src/index.ts',
     output: {
-      dir: 'output',
+      dir: 'dist',
       format: 'cjs',
     },
     plugins: [
@@ -43,7 +43,7 @@ export default [
     ],
   },
   {
-    input: 'dist/types/index.d.ts',
+    input: 'dist/dts/index.d.ts',
     output: [{ file: 'dist/index.d.ts', format: 'esm' }],
     external: [/\.css$/],
     plugins: [dts()],

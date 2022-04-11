@@ -11,7 +11,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "rimraf dist && tsc && rollup -c rollup.config.js",
+    "build": "rimraf dist && tsc --emitDeclarationOnly && rollup --config",
+    "tsc": "tsc",
     "preview": "vite preview",
     "generate": "graphql-codegen -r dotenv/config --config codegen.yml",
     "lint": "eslint --ext .ts,.tsx --fix src/"
