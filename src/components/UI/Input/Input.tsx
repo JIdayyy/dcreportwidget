@@ -1,7 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react'
 import { FieldValues, UseFormRegister } from 'react-hook-form'
-import './input.css'
 
 type Props = {
   register: UseFormRegister<FieldValues>
@@ -15,6 +14,10 @@ export default function Input({
   placeholder,
 }: Props): JSX.Element {
   return (
-    <input className="input" {...register(name)} placeholder={placeholder} />
+    <input
+      className="w-full rounded-sm px-2 py-1 border-blue-base border"
+      {...register(name)}
+      placeholder={placeholder}
+    />
   )
 }

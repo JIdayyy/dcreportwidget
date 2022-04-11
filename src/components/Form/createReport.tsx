@@ -10,9 +10,8 @@ import {
 import Input from '../UI/Input/Input'
 import Loader from '../UI/Loader'
 import TextArea from '../UI/TextArea/TextArea'
-import './createbug.form.css'
 
-const websiteId = 'feiuhzb'
+const websiteId = 'acc029c4-5979-40e7-b4bd-9bd9774ac773'
 
 export default function CreateReport(): JSX.Element {
   const { state, dispatch } = useContext(AppContext)
@@ -54,7 +53,7 @@ export default function CreateReport(): JSX.Element {
 
   return (
     <form
-      className="createbug-form-container"
+      className="flex flex-col align-middle justify-between items-center w-full h-full p-4"
       onSubmit={handleSubmit(onSubmit)}
     >
       <Input placeholder="Title" name="title" register={register} />
@@ -63,7 +62,10 @@ export default function CreateReport(): JSX.Element {
         name="description"
         register={register}
       />
-      <button className="submit-button" type="submit">
+      <button
+        className="bg-blue-base flex align-middle justify-center items-center text-white h-8 w-20 font-bold text-base px-2 py-1 rounded-sm"
+        type="submit"
+      >
         {loading ? <Loader /> : 'Submit'}
       </button>
     </form>

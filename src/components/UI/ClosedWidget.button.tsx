@@ -1,6 +1,5 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import WidgetButton from '../../static/widget_button.png'
-import './closed.button.css'
 
 type Props = {
   setIsOpen: Dispatch<SetStateAction<boolean>>
@@ -8,7 +7,10 @@ type Props = {
 
 export default function ClosedWidgetButton({ setIsOpen }: Props) {
   return (
-    <button className="closed-button" onClick={() => setIsOpen(true)}>
+    <button
+      className="absolute bottom-10 right-10"
+      onClick={() => setIsOpen(true)}
+    >
       <img src={WidgetButton} width={50} height={50} />
     </button>
   )

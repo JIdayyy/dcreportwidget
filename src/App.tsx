@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { ApolloProvider } from '@apollo/client'
 import React, { useEffect, useReducer, useState } from 'react'
-import './App.css'
+// import './App.css'
 import WidgetPortal from './components/Portal'
 import initializeCustomApolloClient from './services/graphql'
 import appReducer from './context/reducers/AppReducer'

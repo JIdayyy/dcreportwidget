@@ -8,7 +8,7 @@ import {
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null
 
-const serverUrl = 'http://localhost:5000/graphql'
+const serverUrl = 'http://localhost:4000/graphql'
 
 const httpLink = createHttpLink({
   uri: serverUrl as string,
