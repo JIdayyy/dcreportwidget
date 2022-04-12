@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
-import { ActionType } from '../../context/Actions'
+import { ActionType, NavigateActionType } from '../../context/Actions'
 import { AppContext } from '../../context/AppContext'
+import { RoutesContext } from '../../context/RoutesContext'
 import {
   BugSeverity,
   BugStatus,
   useCreateCustomBugMutation,
 } from '../../generated/graphql'
+import { RoutePayload } from '../../interfaces/enum'
 import Input from '../UI/Input/Input'
 import Loader from '../UI/Loader'
 import TextArea from '../UI/TextArea/TextArea'
@@ -14,11 +16,15 @@ import TextArea from '../UI/TextArea/TextArea'
 const websiteId = 'acc029c4-5979-40e7-b4bd-9bd9774ac773'
 
 export default function CreateReport(): JSX.Element {
-  const { state, dispatch } = useContext(AppContext)
+  const { state } = useContext(AppContext)
+  const { dispatch: navigate } = useContext(RoutesContext)
   const { handleSubmit, register } = useForm()
   const [mutateCreateBug, { loading }] = useCreateCustomBugMutation({
     onCompleted: () => {
-      dispatch({ type: ActionType.SetSection, payload: '' })
+      navigate({
+        type: NavigateActionType.SetRoute,
+        payload: RoutePayload.HOME,
+      })
     },
   })
 

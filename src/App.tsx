@@ -1,17 +1,18 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ApolloProvider } from '@apollo/client'
-import React, { lazy, useEffect, useReducer, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import './App.css'
 import './index.css'
-import WidgetPortal from './components/Portal'
-import initializeCustomApolloClient from './services/graphql'
-import appReducer from './context/reducers/AppReducer'
-import { AppContext, AppContextDefault } from './context/AppContext'
-import WidgetOpenHOC from './components/WidgetOpen/WidgetOpenHOC'
+import Widget from './components/WidgetOpen/WidgetOpenHOC'
 
-const client = initializeCustomApolloClient()
+export type AppConfig = {
+  websiteId: string
+}
 
-function App(): JSX.Element {
+export interface IProps {
+  config: AppConfig
+}
+
+function App({ config }: IProps): JSX.Element {
   const [isClient, setIsClient] = useState<boolean>(false)
 
   useEffect(() => {
@@ -20,15 +21,7 @@ function App(): JSX.Element {
     }
   }, [])
 
-  return (
-    <>
-      {isClient && (
-        <WidgetPortal>
-          <WidgetOpenHOC />
-        </WidgetPortal>
-      )}
-    </>
-  )
+  return <>{isClient && <Widget />}</>
 }
 
 export default App
