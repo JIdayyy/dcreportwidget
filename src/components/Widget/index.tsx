@@ -1,19 +1,17 @@
-import React, { useContext, useEffect, useState } from 'react'
+/* eslint-disable react/jsx-pascal-case */
+import React, { useContext, useEffect } from 'react'
 import Header from '../Header/index'
-import Reports from '../Report/index'
 import Footer from '../Footer/index'
 import { useMutateLoginMutation } from '../../generated/graphql'
-import { AppContext } from '../../context/AppContext'
-import { ActionType } from '../../context/Actions'
 import './widget.css'
+import { RoutesContext } from '../../context/RoutesContext'
 
 export default function Widget({
   setIsOpen,
 }: {
   setIsOpen: (value: boolean) => void
 }): JSX.Element {
-  const [section, setSection] = useState<string | null>(null)
-  const { state, dispatch } = useContext(AppContext)
+  const { state: Route } = useContext(RoutesContext)
 
   const [login] = useMutateLoginMutation({
     variables: {
@@ -29,24 +27,10 @@ export default function Widget({
   }, [])
 
   return (
-    <div className="widget-container">
+    <div className="absolute bottom-10 right-10 h-96 w-72 bg-gray-200 flex flex-col items-center align-top overflow-hidden shadow-md justify-start rounded-md">
       <Header setIsOpen={setIsOpen} />
 
-      {!state.section && (
-        <div className="first-body">
-          <button
-            onClick={() =>
-              dispatch({ type: ActionType.SetSection, payload: 'bugreport' })
-            }
-            type="button"
-            className="first-body-button"
-          >
-            Report a bug
-          </button>
-        </div>
-      )}
-
-      {state.section === 'bugreport' && <Reports />}
+      <Route.component />
 
       <Footer />
     </div>

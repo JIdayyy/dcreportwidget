@@ -1,37 +1,27 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { ApolloProvider } from '@apollo/client'
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import './App.css'
-import WidgetPortal from './components/Portal'
-import initializeCustomApolloClient from './services/graphql'
-import appReducer from './context/reducers/AppReducer'
-import { AppContext, AppContextDefault } from './context/AppContext'
-import WidgetOpenHOC from './components/WidgetOpen/WidgetOpenHOC'
+import './index.css'
+import Widget from './components/WidgetOpen/WidgetOpenHOC'
 
-const client = initializeCustomApolloClient()
+export type AppConfig = {
+  websiteId: string
+}
 
-function App(): JSX.Element {
-  const [state, dispatch] = useReducer(appReducer, AppContextDefault)
+export interface IProps {
+  config: AppConfig
+}
+
+function App({ config }: IProps): JSX.Element {
   const [isClient, setIsClient] = useState<boolean>(false)
-  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   useEffect(() => {
-    setIsClient(true)
+    if (typeof window !== 'undefined') {
+      setIsClient(true)
+    }
   }, [])
 
-  return (
-    <>
-      {isClient && (
-        <ApolloProvider client={client}>
-          <AppContext.Provider value={{ state, dispatch }}>
-            <WidgetPortal>
-              <WidgetOpenHOC />
-            </WidgetPortal>
-          </AppContext.Provider>
-        </ApolloProvider>
-      )}
-    </>
-  )
+  return <>{isClient && <Widget />}</>
 }
 
 export default App
