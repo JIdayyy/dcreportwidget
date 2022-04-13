@@ -3,7 +3,6 @@ import React, { Suspense, useEffect, useState } from 'react'
 import './App.css'
 import './index.css'
 import Widget from './components/WidgetOpen/WidgetOpenHOC'
-import Loader from './components/UI/Loader'
 
 export type AppConfig = {
   websiteId: string
@@ -12,10 +11,6 @@ export type AppConfig = {
 export interface IProps {
   config: AppConfig
 }
-
-const LazyWidget = React.lazy(
-  () => import('./components/WidgetOpen/WidgetOpenHOC')
-)
 
 const App: React.FC<IProps> = ({ config }) => {
   const [isClient, setIsClient] = useState<boolean>(false)
@@ -26,15 +21,7 @@ const App: React.FC<IProps> = ({ config }) => {
     }
   }, [])
 
-  return (
-    <>
-      {isClient && (
-        <Suspense fallback={<Loader />}>
-          <LazyWidget />
-        </Suspense>
-      )}
-    </>
-  )
+  return <>{isClient && <Widget />}</>
 }
 
 export default App

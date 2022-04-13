@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
-import { ActionType, NavigateActionType } from '../../context/Actions'
+import { NavigateActionType } from '../../context/Actions'
 import { AppContext } from '../../context/AppContext'
 import { RoutesContext } from '../../context/RoutesContext'
 import {

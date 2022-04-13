@@ -8,7 +8,6 @@ export default function Header({
   setIsOpen: (value: boolean) => void
 }): JSX.Element {
   const { state } = useContext(RoutesContext)
-  console.log(state)
   return (
     <div className="bg-blue-base h-60 flex flex-col justify-between align-middle items-start z-10 w-full text-white font-bold p-5">
       <p className="w-1/2">Welcome to DCReports 🐛</p>
