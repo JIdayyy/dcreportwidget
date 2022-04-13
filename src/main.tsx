@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import App from './App'
 
 const config = {
-  websiteId: '5e8f8f8f-8f8f-8f8f-8f8f-8f8f8f8f8f8f',
+  websiteId: '729ccb1b-3c65-478a-8657-9674244a5314',
 }
 
 ReactDOM.render(

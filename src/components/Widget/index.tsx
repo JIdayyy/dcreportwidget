@@ -3,7 +3,6 @@ import React, { useContext, useEffect } from 'react'
 import Header from '../Header/index'
 import Footer from '../Footer/index'
 import { useMutateLoginMutation } from '../../generated/graphql'
-import './widget.css'
 import { RoutesContext } from '../../context/RoutesContext'
 
 export default function Widget({
@@ -27,7 +26,10 @@ export default function Widget({
   }, [])
 
   return (
-    <div className="absolute bottom-10 right-10 h-96 w-72 bg-gray-200 flex flex-col items-center align-top overflow-hidden shadow-md justify-start rounded-md">
+    <div
+      style={{ height: '400px' }}
+      className="absolute bottom-10 right-10  w-72 bg-gray-100 flex flex-col items-center align-top overflow-hidden shadow-md justify-start rounded-xl"
+    >
       <Header setIsOpen={setIsOpen} />
 
       <Route.component />

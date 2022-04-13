@@ -1,6 +1,6 @@
 import { NavigateActionType, NavigationActions } from '../Actions'
 import appRoutes from '../../Config/config.routes'
-import { RoutePayload } from '../../interfaces/enum'
+import { RoutePayload } from '../../interfaces/enums'
 import { TRoute } from '../../interfaces/routes'
 
 function routeReducer(state: TRoute, action: NavigationActions): TRoute {

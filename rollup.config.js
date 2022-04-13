@@ -20,7 +20,6 @@ export default [
         file: packageJson.main,
         format: 'cjs',
         sourcemap: true,
-        name: 'react-lib',
       },
       {
         file: packageJson.module,
@@ -50,7 +49,7 @@ export default [
   },
   {
     input: 'dist/dts/index.d.ts',
-    output: [{ file: 'dist/index.d.ts', format: 'esm' }],
+    output: [{ file: 'dist/index.d.ts', format: 'cjs' }],
     external: [/\.css$/],
     plugins: [dts()],
   },

@@ -1,29 +1,27 @@
 /* eslint-disable import/no-cycle */
-import React, { useCallback, useContext } from 'react'
+import React, { useContext } from 'react'
 import { RoutesContext } from '../../context/RoutesContext'
 import { NavigateActionType } from '../../context/Actions'
-import { RoutePayload } from '../../interfaces/enum'
+import { RoutePayload } from '../../interfaces/enums'
+import BugIcon from '../../static/svgs/Bug'
 
 export default function Choices(): JSX.Element {
   const { dispatch } = useContext(RoutesContext)
 
-  const handleClick = useCallback(
-    () =>
-      dispatch({
-        type: NavigateActionType.SetRoute,
-        payload: RoutePayload.CATEGORIES,
-      }),
-    []
-  )
+  const handleClick = () =>
+    dispatch({
+      type: NavigateActionType.SetRoute,
+      payload: RoutePayload.CATEGORIES,
+    })
 
   return (
-    <div className="first-body">
+    <div className="w-full p-4 h-full">
       <button
         onClick={handleClick}
         type="button"
-        className="first-body-button shadow-sm"
+        className="shadow-md flex z-40 relative transform -translate-y-8 items-center justify-start text-blue-base bg-white text-left rounded-md p-1 text-base w-full font-bold"
       >
-        Report a bug
+        <BugIcon /> <span className="mx-2">Report a bug</span>
       </button>
     </div>
   )

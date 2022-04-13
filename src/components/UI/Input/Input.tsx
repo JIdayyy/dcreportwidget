@@ -15,7 +15,7 @@ export default function Input({
 }: Props): JSX.Element {
   return (
     <input
-      className="w-full rounded-sm px-2 py-1 border-blue-base border"
+      className="w-full rounded-md px-2 py-1 border-blue-base border"
       {...register(name)}
       placeholder={placeholder}
     />

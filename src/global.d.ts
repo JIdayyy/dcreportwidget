@@ -4,3 +4,5 @@ interface ImportMeta {
     VITE_SERVER_URL: string
   }
 }
+
+declare module '*.png'

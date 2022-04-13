@@ -1,4 +1,4 @@
-import { RoutePayload } from '../interfaces/enum'
+import { RoutePayload } from '../interfaces/enums'
 
 export enum ActionType {
   SetSelectedCategory,

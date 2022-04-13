@@ -1,7 +1,7 @@
 import Categories from '../components/Categories'
 import Choices from '../components/Choices'
 import CreateReport from '../components/Form/createReport'
-import { RoutePayload } from '../interfaces/enum'
+import { RoutePayload } from '../interfaces/enums'
 import { TRoutes } from '../interfaces/routes'
 
 const routes: TRoutes = {

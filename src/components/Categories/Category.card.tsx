@@ -3,7 +3,11 @@ import { ActionType, NavigateActionType } from '../../context/Actions'
 import { AppContext } from '../../context/AppContext'
 import { RoutesContext } from '../../context/RoutesContext'
 import { GetAllCategoriesQuery } from '../../generated/graphql'
-import { RoutePayload } from '../../interfaces/enum'
+import { RoutePayload } from '../../interfaces/enums'
+import NetworkIcon from '../../static/svgs/Network'
+import OtherIcon from '../../static/svgs/Other'
+import ProductsIcon from '../../static/svgs/Products'
+import UiuxIcon from '../../static/svgs/Uiux'
 
 type IProps = {
   category: GetAllCategoriesQuery['categories'][number]
@@ -21,14 +25,22 @@ export default function CategoryCard({ category }: IProps): JSX.Element {
     })
   }
 
+  const CategoryIcon = {
+    'UI / UX DESIGN': <UiuxIcon />,
+    Network: <NetworkIcon />,
+    OTHER: <OtherIcon />,
+    PRODUCTS: <ProductsIcon />,
+  }
+
   return (
     <button
       onClick={handleClick}
       type="button"
-      className="my-1 text-white rounded-sm px-3 py-1 w-full text-base font-bold"
+      className="my-1 flex items-center align-middle justify-around text-white rounded-md px-3 py-3 w-full text-base font-bold"
       style={{ backgroundColor: category.backgroundColor }}
     >
-      {category.name}
+      {CategoryIcon[category.name as keyof typeof CategoryIcon]}
+      <span className="w-full"> {category.name}</span>
     </button>
   )
 }

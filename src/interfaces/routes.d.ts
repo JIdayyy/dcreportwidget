@@ -1,4 +1,4 @@
-import { RoutePayload } from './enum'
+import { RoutePayload } from './enums'
 
 type TRoute = {
   path: string

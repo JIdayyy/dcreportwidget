@@ -1,13 +1,11 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React from 'react'
 import './close.button.css'
 
 type Props = { setIsOpen: (value: boolean) => void }
 
-export default function CloseButton({ setIsOpen }: Props) {
+export default function CloseButton({ setIsOpen }: Props): JSX.Element {
   return (
-    <button
-      onClick={() => setIsOpen(false)}
-      className="cursor-pointer absolute right-10 top-6 w-1 h-1 opacity-30 hover:opacity-100"
-    />
+    // eslint-disable-next-line jsx-a11y/control-has-associated-label
+    <button type="button" onClick={() => setIsOpen(false)} className="close" />
   )
 }

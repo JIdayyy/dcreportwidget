@@ -15,7 +15,7 @@ export default function TextArea({
 }: Props): JSX.Element {
   return (
     <textarea
-      className="w-full h-32 px-2 py-1 border-blue-base border"
+      className="w-full h-32 px-2 py-1 rounded-md border-blue-base border"
       {...register(name)}
       placeholder={placeholder}
     />
