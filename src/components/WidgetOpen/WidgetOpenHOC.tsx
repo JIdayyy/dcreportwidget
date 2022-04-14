@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { ApolloProvider } from '@apollo/client'
 import React, { useReducer, useState } from 'react'
 import { AppContext, AppContextDefault } from '../../context/AppContext'

@@ -26,21 +26,20 @@ export default function CategoryCard({ category }: IProps): JSX.Element {
   }
 
   const CategoryIcon = {
-    'UI / UX DESIGN': <UiuxIcon />,
+    'UI/UX': <UiuxIcon />,
     Network: <NetworkIcon />,
     OTHER: <OtherIcon />,
     PRODUCTS: <ProductsIcon />,
   }
-
   return (
     <button
       onClick={handleClick}
       type="button"
-      className="my-1 flex items-center align-middle justify-around text-white rounded-md px-3 py-3 w-full text-base font-bold"
+      className="my-1 flex items-center align-middle justify-around text-white rounded-md px-8 py-3 w-full text-base font-bold"
       style={{ backgroundColor: category.backgroundColor }}
     >
       {CategoryIcon[category.name as keyof typeof CategoryIcon]}
-      <span className="w-full"> {category.name}</span>
+      <span className="w-full text-center"> {category.name}</span>
     </button>
   )
 }

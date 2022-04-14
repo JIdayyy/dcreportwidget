@@ -29,7 +29,7 @@ export default function Widget({
   return (
     <div
       style={{ height: '400px' }}
-      className="absolute bottom-10 right-10  w-72 bg-gray-100 flex flex-col items-center align-top overflow-hidden shadow-md justify-start rounded-xl"
+      className=" bottom-10 right-10  fixed w-72 bg-gray-100 flex flex-col items-center align-top overflow-hidden shadow-md justify-start rounded-xl"
     >
       <Header setIsOpen={setIsOpen} />
 

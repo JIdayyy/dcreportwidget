@@ -1,5 +1,7 @@
+/* eslint-disable import/no-cycle */
 import React, { useContext } from 'react'
 import { FieldValues, useForm } from 'react-hook-form'
+import { WidgetConfigContext } from '../../App'
 import { NavigateActionType } from '../../context/Actions'
 import { AppContext } from '../../context/AppContext'
 import { RoutesContext } from '../../context/RoutesContext'
@@ -13,12 +15,12 @@ import Input from '../UI/Input/Input'
 import Loader from '../UI/Loader'
 import TextArea from '../UI/TextArea/TextArea'
 
-const websiteId = '729ccb1b-3c65-478a-8657-9674244a5314'
-
 export default function CreateReport(): JSX.Element {
   const { state } = useContext(AppContext)
   const { dispatch: navigate } = useContext(RoutesContext)
   const { handleSubmit, register } = useForm()
+  const { websiteId } = useContext(WidgetConfigContext)
+
   const [mutateCreateBug, { loading }] = useCreateCustomBugMutation({
     onCompleted: () => {
       navigate({
@@ -36,7 +38,7 @@ export default function CreateReport(): JSX.Element {
           description: formData.description,
           Website: {
             connect: {
-              id: websiteId as string,
+              id: websiteId,
             },
           },
           severity: BugSeverity.Low,
@@ -75,6 +77,7 @@ export default function CreateReport(): JSX.Element {
         register={register}
       />
       <button
+        style={{ backgroundColor: 'rgb(36 50 63 )' }}
         className="bg-blue-base my-1 flex align-middle justify-center items-center text-white h-6 w-20 font-semibold text-base px-2 py-1 rounded-sm"
         type="submit"
       >

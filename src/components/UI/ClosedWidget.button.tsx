@@ -9,7 +9,8 @@ export default function ClosedWidgetButton({ setIsOpen }: Props): JSX.Element {
   return (
     <button
       type="button"
-      className="absolute bottom-10 right-10 flex items-center justify-around text-white bg-blue-base border-3 font-bold border rounded-md px-2 py-1 border-white"
+      style={{ backgroundColor: '#24323F' }}
+      className="absolute bottom-10 right-10 flex items-center justify-around text-white  border-3 font-bold border rounded-md px-2 py-1 border-white"
       onClick={() => setIsOpen(true)}
     >
       <span>SUPPORT</span>
