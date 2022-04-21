@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { NavigateActionType, NavigationActions } from '../Actions'
 import appRoutes from '../../Config/config.routes'
 import { RoutePayload } from '../../interfaces/enums'

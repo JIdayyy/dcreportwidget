@@ -7,7 +7,6 @@ import Widget from './components/WidgetOpen/WidgetOpenHOC'
 
 export type AppConfig = {
   websiteId: string
-  userId: string
 }
 
 export interface IProps {
@@ -16,7 +15,6 @@ export interface IProps {
 
 export const WidgetConfigContext = createContext({
   websiteId: '',
-  userId: '',
 })
 
 const App: React.FC<IProps> = ({ config }) => {
@@ -31,9 +29,7 @@ const App: React.FC<IProps> = ({ config }) => {
   return (
     <>
       {isClient && (
-        <WidgetConfigContext.Provider
-          value={{ websiteId: config.websiteId, userId: config.userId }}
-        >
+        <WidgetConfigContext.Provider value={{ websiteId: config.websiteId }}>
           <Widget />
         </WidgetConfigContext.Provider>
       )}

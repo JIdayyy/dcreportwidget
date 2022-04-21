@@ -18,8 +18,8 @@ import TextArea from '../UI/TextArea/TextArea'
 export default function CreateReport(): JSX.Element {
   const { state } = useContext(AppContext)
   const { dispatch: navigate } = useContext(RoutesContext)
-  const { handleSubmit, register } = useForm()
   const { websiteId } = useContext(WidgetConfigContext)
+  const { handleSubmit, register } = useForm()
 
   const [mutateCreateBug, { loading }] = useCreateCustomBugMutation({
     onCompleted: () => {
@@ -36,17 +36,17 @@ export default function CreateReport(): JSX.Element {
         data: {
           title: formData.title,
           description: formData.description,
-          Website: {
-            connect: {
-              id: websiteId,
-            },
-          },
           severity: BugSeverity.Low,
           priority: formData.priority,
           status: BugStatus.Open,
           Category: {
             connect: {
               id: state.category,
+            },
+          },
+          Website: {
+            connect: {
+              id: websiteId,
             },
           },
           user: {

@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable import/no-extraneous-dependencies */
 import {
   ApolloClient,
@@ -8,13 +9,21 @@ import {
 
 let apolloClient: ApolloClient<NormalizedCacheObject> | null = null
 
-const serverUrl = 'http://localhost:4000/graphql'
+const serverUrl =
+  typeof process !== 'undefined'
+    ? process.env.REACT_APP_SERVER_URL
+    : import.meta.env.VITE_SERVER_URL
+
+const API_KEY =
+  typeof process !== 'undefined'
+    ? process.env.NEXT_PUBLIC_API_KEY
+    : import.meta.env.VITE_API_WIDGET_TOKEN
 
 const httpLink = createHttpLink({
   uri: serverUrl as string,
   credentials: 'include',
   headers: {
-    'platform-auth-user-agent': 'web-platform',
+    authorization: API_KEY,
   },
 })
 

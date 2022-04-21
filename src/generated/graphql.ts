@@ -665,7 +665,6 @@ export type BugUpdateInput = {
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  number?: InputMaybe<IntFieldUpdateOperationsInput>;
   priority?: InputMaybe<EnumBugPriorityFieldUpdateOperationsInput>;
   severity?: InputMaybe<EnumBugSeverityFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumBugStatusFieldUpdateOperationsInput>;
@@ -679,7 +678,6 @@ export type BugUpdateManyMutationInput = {
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  number?: InputMaybe<IntFieldUpdateOperationsInput>;
   priority?: InputMaybe<EnumBugPriorityFieldUpdateOperationsInput>;
   severity?: InputMaybe<EnumBugSeverityFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumBugStatusFieldUpdateOperationsInput>;
@@ -785,7 +783,6 @@ export type BugUpdateWithoutCategoryInput = {
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  number?: InputMaybe<IntFieldUpdateOperationsInput>;
   priority?: InputMaybe<EnumBugPriorityFieldUpdateOperationsInput>;
   severity?: InputMaybe<EnumBugSeverityFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumBugStatusFieldUpdateOperationsInput>;
@@ -802,7 +799,6 @@ export type BugUpdateWithoutCommentsInput = {
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  number?: InputMaybe<IntFieldUpdateOperationsInput>;
   priority?: InputMaybe<EnumBugPriorityFieldUpdateOperationsInput>;
   severity?: InputMaybe<EnumBugSeverityFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumBugStatusFieldUpdateOperationsInput>;
@@ -819,7 +815,6 @@ export type BugUpdateWithoutFileInput = {
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  number?: InputMaybe<IntFieldUpdateOperationsInput>;
   priority?: InputMaybe<EnumBugPriorityFieldUpdateOperationsInput>;
   severity?: InputMaybe<EnumBugSeverityFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumBugStatusFieldUpdateOperationsInput>;
@@ -837,7 +832,6 @@ export type BugUpdateWithoutUserInput = {
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  number?: InputMaybe<IntFieldUpdateOperationsInput>;
   priority?: InputMaybe<EnumBugPriorityFieldUpdateOperationsInput>;
   severity?: InputMaybe<EnumBugSeverityFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumBugStatusFieldUpdateOperationsInput>;
@@ -853,7 +847,6 @@ export type BugUpdateWithoutWebsiteInput = {
   created_at?: InputMaybe<DateTimeFieldUpdateOperationsInput>;
   description?: InputMaybe<StringFieldUpdateOperationsInput>;
   id?: InputMaybe<StringFieldUpdateOperationsInput>;
-  number?: InputMaybe<IntFieldUpdateOperationsInput>;
   priority?: InputMaybe<EnumBugPriorityFieldUpdateOperationsInput>;
   severity?: InputMaybe<EnumBugSeverityFieldUpdateOperationsInput>;
   status?: InputMaybe<EnumBugStatusFieldUpdateOperationsInput>;
@@ -917,6 +910,7 @@ export type BugWhereInput = {
 
 export type BugWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
+  number?: InputMaybe<Scalars['Int']>;
 };
 
 export type Category = {
@@ -1266,6 +1260,10 @@ export type CategoryWhereInput = {
 
 export type CategoryWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
+};
+
+export type CloseBugInput = {
+  status?: InputMaybe<EnumBugStatusFieldUpdateOperationsInput>;
 };
 
 export type Comment = {
@@ -1709,6 +1707,24 @@ export type CommentWhereInput = {
 
 export type CommentWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
+};
+
+export type CreateBugFromWidgetInputs = {
+  Category?: InputMaybe<CategoryCreateNestedOneWithoutBugInput>;
+  File?: InputMaybe<FileCreateNestedManyWithoutBugInput>;
+  Website: WebsiteCreateNestedOneWithoutBugInput;
+  comments?: InputMaybe<CommentCreateNestedManyWithoutBugInput>;
+  created_at?: InputMaybe<Scalars['DateTime']>;
+  description: Scalars['String'];
+  id?: InputMaybe<Scalars['String']>;
+  number?: InputMaybe<Scalars['Int']>;
+  priority?: InputMaybe<BugPriority>;
+  severity: BugSeverity;
+  status?: InputMaybe<BugStatus>;
+  title: Scalars['String'];
+  updated_at?: InputMaybe<Scalars['DateTime']>;
+  user: UserCreateNestedOneWithoutBugInput;
+  validation_status?: InputMaybe<ValidationStatus>;
 };
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -2922,8 +2938,10 @@ export type LoginInput = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  closeBug: Bug;
   createBug: Bug;
   createBugCustom: Bug;
+  createBugFromWidget: Bug;
   createCategory: Category;
   createComment: Comment;
   createFeature: Feature;
@@ -2956,6 +2974,7 @@ export type Mutation = {
   deleteUser: Maybe<User>;
   deleteWebsite: Maybe<Website>;
   login: User;
+  logout: Scalars['String'];
   me: User;
   pubSubMutation: Scalars['Boolean'];
   pubSubMutationToDynamicTopic: Scalars['Boolean'];
@@ -2978,6 +2997,7 @@ export type Mutation = {
   updateUser: Maybe<User>;
   updateWebsite: Maybe<Website>;
   uploadFile: File;
+  uploadWebsiteLogo: File;
   upsertBug: Bug;
   upsertCategory: Category;
   upsertComment: Comment;
@@ -2986,6 +3006,13 @@ export type Mutation = {
   upsertNotification: Notification;
   upsertUser: User;
   upsertWebsite: Website;
+  widgetLogin: User;
+};
+
+
+export type MutationCloseBugArgs = {
+  data: CloseBugInput;
+  where: BugWhereUniqueInput;
 };
 
 
@@ -2996,6 +3023,11 @@ export type MutationCreateBugArgs = {
 
 export type MutationCreateBugCustomArgs = {
   data: BugCreateInput;
+};
+
+
+export type MutationCreateBugFromWidgetArgs = {
+  data: CreateBugFromWidgetInputs;
 };
 
 
@@ -3289,6 +3321,11 @@ export type MutationUploadFileArgs = {
 };
 
 
+export type MutationUploadWebsiteLogoArgs = {
+  file: Scalars['Upload'];
+};
+
+
 export type MutationUpsertBugArgs = {
   create: BugCreateInput;
   update: BugUpdateInput;
@@ -3342,6 +3379,11 @@ export type MutationUpsertWebsiteArgs = {
   create: WebsiteCreateInput;
   update: WebsiteUpdateInput;
   where: WebsiteWhereUniqueInput;
+};
+
+
+export type MutationWidgetLoginArgs = {
+  data: WidgetLoginInput;
 };
 
 export type NestedBoolFilter = {
@@ -4100,6 +4142,7 @@ export type Query = {
   users: Array<User>;
   website: Maybe<Website>;
   websites: Array<Website>;
+  widgetToken: WidgetToken;
 };
 
 
@@ -4454,6 +4497,11 @@ export type QueryWebsitesArgs = {
   where: InputMaybe<WebsiteWhereInput>;
 };
 
+
+export type QueryWidgetTokenArgs = {
+  where: WebsiteWhereUniqueInput;
+};
+
 export enum QueryMode {
   Default = 'default',
   Insensitive = 'insensitive'
@@ -4471,7 +4519,8 @@ export enum Role {
   Admin = 'ADMIN',
   Manager = 'MANAGER',
   SuperAdmin = 'SUPER_ADMIN',
-  User = 'USER'
+  User = 'USER',
+  Widget = 'WIDGET'
 }
 
 export enum SortOrder {
@@ -5610,14 +5659,23 @@ export type WebsiteWhereUniqueInput = {
   id?: InputMaybe<Scalars['String']>;
 };
 
+export type WidgetLoginInput = {
+  widget_token: Scalars['String'];
+};
+
+export type WidgetToken = {
+  __typename?: 'WidgetToken';
+  widget_token: Scalars['String'];
+};
+
 export type UserFragment = { __typename?: 'User', id: string, first_name: string, last_name: string, email: string, avatar: string, role: Array<Role> };
 
 export type CreateCustomBugMutationVariables = Exact<{
-  data: BugCreateInput;
+  data: CreateBugFromWidgetInputs;
 }>;
 
 
-export type CreateCustomBugMutation = { __typename?: 'Mutation', createBugCustom: { __typename?: 'Bug', id: string } };
+export type CreateCustomBugMutation = { __typename?: 'Mutation', createBugFromWidget: { __typename?: 'Bug', id: string } };
 
 export type CreateCommentMutationVariables = Exact<{
   data: CommentCreateInput;
@@ -5737,8 +5795,8 @@ export const UserFragmentDoc = gql`
 }
     `;
 export const CreateCustomBugDocument = gql`
-    mutation createCustomBug($data: BugCreateInput!) {
-  createBugCustom(data: $data) {
+    mutation createCustomBug($data: CreateBugFromWidgetInputs!) {
+  createBugFromWidget(data: $data) {
     id
   }
 }
