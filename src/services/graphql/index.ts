@@ -11,8 +11,10 @@ let apolloClient: ApolloClient<NormalizedCacheObject> | null = null
 
 const serverUrl =
   typeof process !== 'undefined'
-    ? process.env.REACT_APP_SERVER_URL
+    ? process.env.NEXT_PUBLIC_WIDGET_API_URL
     : import.meta.env.VITE_SERVER_URL
+
+console.log(serverUrl)
 
 const API_KEY =
   typeof process !== 'undefined'

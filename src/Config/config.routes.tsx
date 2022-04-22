@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import Categories from '../components/Categories'
 import Choices from '../components/Choices'
 import CreateReport from '../components/Form/createReport'
